@@ -1,14 +1,30 @@
-import './App.css';
-import Navbar from "./components/Navbar"
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import CreateMeeting from "./components/CreateMeeting";
+import CreateTopic from "./components/CreateTopic";
+import MeetingDetails from "./components/MeetingDetails";
+import MeetingList from "./components/MeetingList";
+import Navbar from "./components/Navbar";
+import Homepage from "./pages/Homepage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import EditMeeting from "./components/EditMeeting";
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
 
-    <Navbar />
-
-    
-
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/meetings" element={<MeetingList />} />
+        <Route path="/meetings/:meetingId" element={<MeetingDetails />} />
+        <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
+        <Route path="/meetings/create" element={<CreateMeeting />} />
+        <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
+      </Routes>
     </div>
   );
 }
