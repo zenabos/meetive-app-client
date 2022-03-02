@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from "../context/auth.context";
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
@@ -11,6 +12,9 @@ export default function CreateMeeting() {
   const [date, setDate] = useState(undefined);
   const [startTime, setStartTime] = useState(undefined);
   const [invites, setInvites] = useState([]);
+
+  const {getToken} = useContext(AuthContext);
+  const storedToken = getToken();
 
   const navigate = useNavigate();
 
@@ -27,8 +31,11 @@ export default function CreateMeeting() {
       invites,
     };
 
+
     axios
-      .post(`http://localhost:5005/api/meetings`, meetingDetails)
+      .post(`http://localhost:5005/api/meetings`, meetingDetails, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         console.log(response.data);
         navigate("/meetings");

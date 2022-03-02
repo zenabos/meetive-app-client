@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 export default function MeetingsList() {
   const [meetings, setMeetings] = useState([]);
 
+  const { getToken } = useContext(AuthContext);
+  const storedToken = getToken();
+
   useEffect(() => {
     axios
-      .get("http://localhost:5005/api/meetings")
+      .get("http://localhost:5005/api/meetings", {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => setMeetings(response.data))
       .catch((err) => console.log("error getting meetings from api", err));
   }, []);
