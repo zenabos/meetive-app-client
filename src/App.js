@@ -3,7 +3,7 @@ import "./App.css";
 import CreateMeeting from "./components/CreateMeeting";
 import CreateTopic from "./components/CreateTopic";
 import MeetingDetails from "./components/MeetingDetails";
-import MeetingList from "./components/MeetingList";
+import MeetingList from "./components/MeetingsList";
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import SignupPage from "./pages/SignupPage";
