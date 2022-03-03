@@ -20,7 +20,7 @@ function LoginPage(props) {
     const userDetails = { email, password };
 
     axios
-      .post(`http://localhost:5005/api/auth/login`, userDetails)
+      .post(`${process.env.REACT_APP_API_URL}/auth/login`, userDetails)
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();

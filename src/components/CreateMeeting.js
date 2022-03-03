@@ -33,7 +33,7 @@ export default function CreateMeeting() {
 
 
     axios
-      .post(`http://localhost:5005/api/meetings`, meetingDetails, {
+      .post(`${process.env.REACT_APP_API_URL}/meetings`, meetingDetails, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {

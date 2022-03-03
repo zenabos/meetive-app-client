@@ -24,6 +24,7 @@ function App() {
         <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
         <Route path="/meetings/create" element={<CreateMeeting />} />
         <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
+        <Route path="/create-topic" element={<CreateTopic />} />
       </Routes>
     </div>
   );

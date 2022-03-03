@@ -11,7 +11,7 @@ export default function MeetingsList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5005/api/meetings", {
+      .get(`${process.env.REACT_APP_API_URL}/meetings`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => setMeetings(response.data))
