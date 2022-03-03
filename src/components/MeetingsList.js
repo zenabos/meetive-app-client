@@ -29,7 +29,7 @@ export default function MeetingsList() {
               <Link to={`/meetings/${meeting._id}`}>
                 <div>
                   <p>{meeting.title}</p>
-                  <p>{meeting.date}</p>
+                  <p>{meeting.start}</p>
                   <p>{meeting.time}</p>
                 </div>
               </Link>

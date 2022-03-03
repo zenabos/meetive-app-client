@@ -1,16 +1,13 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../context/auth.context";
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
   const [goal, setGoal] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState(undefined);
-  const [startTime, setStartTime] = useState(undefined);
+  const [start, setStart] = useState(undefined);
   const [invites, setInvites] = useState([]);
 
   const {getToken, user} = useContext(AuthContext);
@@ -26,8 +23,7 @@ export default function CreateMeeting() {
       title,
       goal,
       description,
-      date,
-      startTime,
+      start,
       invites,
       owner: user._id
     };
@@ -50,59 +46,59 @@ export default function CreateMeeting() {
 
       <form onSubmit={handleSubmit}>
         <label>
-          Title:
+          Title: 
           <input
             type="text"
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-        </label>
+        </label> <br/>
 
         <label>
           Goal:
-          <textarea
+          <input
             type="text"
             name="goal"
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
           />
-        </label>
+        </label><br/>
 
         <label>
           Description:
-          <textarea
+          <input
             type="text"
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </label>
-
-        <label>
-          Date:
-          <DatePicker selected={date} onChange={(date) => setDate(date)} />
-        </label>
+        </label><br/>
 
         <label>
           Start:
-          <textarea
-            type="time"
-            name="startTime"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
+          <input
+            type="datetime-local"
+            name="start"
+            value={start}
+            onChange={(e) => setStart(e.target.value)}
           />
-        </label>
+        </label><br/>
+
+        {/* <label>
+          Date:
+          <DatePicker selected={date} onChange={(date) => setDate(date)} />
+        </label><br/> */}
 
         <label>
           Invites:
-          <textarea
+          <input
             type="text"
             name="invites"
             value={invites}
             onChange={(e) => setInvites(e.target.value)}
           />
-        </label>
+        </label><br/>
 
         <button type="submit">Save</button>
       </form>
