@@ -30,8 +30,7 @@ export default function MeetingDetails() {
           <h2>{meeting.title}</h2>
           <p>Goal: {meeting.goal}</p>
           <p>Description: {meeting.description}</p>
-          <p>Date: {meeting.date}</p>
-          <p>Start: {meeting.startTime}</p>
+          <p>Start: {meeting.start}</p>
           <p>Invites: {meeting.invites}</p>
         </div>
       )}

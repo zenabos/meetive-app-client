@@ -25,7 +25,6 @@ export default function CreateMeeting() {
       description,
       start,
       invites,
-      owner: user._id
     };
 
 
@@ -84,11 +83,6 @@ export default function CreateMeeting() {
             onChange={(e) => setStart(e.target.value)}
           />
         </label><br/>
-
-        {/* <label>
-          Date:
-          <DatePicker selected={date} onChange={(date) => setDate(date)} />
-        </label><br/> */}
 
         <label>
           Invites:
