@@ -13,7 +13,7 @@ export default function CreateMeeting() {
   const [startTime, setStartTime] = useState(undefined);
   const [invites, setInvites] = useState([]);
 
-  const {getToken} = useContext(AuthContext);
+  const {getToken, user} = useContext(AuthContext);
   const storedToken = getToken();
 
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ export default function CreateMeeting() {
       date,
       startTime,
       invites,
+      owner: user._id
     };
 
 
