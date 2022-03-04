@@ -9,12 +9,21 @@ export default function MeetingsList() {
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
 
+  const sortMeetings = (meetings) => {
+    const sortedMeetings = meetings.sort(
+      (a, b) => new Date(a.start) - new Date(b.start)
+    );
+    setMeetings(sortedMeetings);
+  };
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/meetings`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then((response) => setMeetings(response.data))
+      .then((response) => {
+        sortMeetings(response.data);
+      })
       .catch((err) => console.log("error getting meetings from api", err));
   }, []);
 
