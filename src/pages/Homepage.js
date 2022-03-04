@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 export default function Homepage() {
-  const { isLoggedIn, user } = useContext(AuthContext);
-  console.log(user)
+  const { user } = useContext(AuthContext);
 
   return (
     <div>
