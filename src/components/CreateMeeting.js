@@ -10,7 +10,7 @@ export default function CreateMeeting() {
   const [start, setStart] = useState(undefined);
   const [invites, setInvites] = useState([]);
 
-  const {getToken, user} = useContext(AuthContext);
+  const {getToken} = useContext(AuthContext);
   const storedToken = getToken();
 
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function CreateMeeting() {
         console.log(response.data);
         navigate("/meetings");
       })
-      .catch((err) => console.log("error creating new project", err));
+      .catch((err) => console.log("error creating new meeting", err));
   };
 
   return (

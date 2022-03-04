@@ -4,7 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 
 export default function CreateTopic(props) {
-  const {meetingId, toggleForm} = props
+  const { meetingId, toggleForm, updateTopics } = props;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,19 +31,18 @@ export default function CreateTopic(props) {
     totalTime,
     meeting: meetingId,
   };
-  console.log(topicDetails)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("processing form...");
-    
+
     axios
       .post(`${process.env.REACT_APP_API_URL}/topics`, topicDetails, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(response.data);
-        toggleForm()
+        updateTopics();
+        toggleForm();
       })
       .catch((err) => console.log("error creating new topic", err));
   };
