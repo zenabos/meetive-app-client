@@ -6,23 +6,44 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import TopicsList from "./TopicsList";
 
+
+
 export default function MeetingDetails() {
   const { meetingId } = useParams();
   const [meeting, setMeeting] = useState("");
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+
 
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
+
+  const settingDateTime = (date) => {
+    const newTime = new Date(date).toLocaleTimeString("nl-NL", { hour: '2-digit', minute: '2-digit' })
+    const newDate = new Date(date).toLocaleDateString("nl-NL")
+    setTime(newTime)
+    setDate(newDate)
+  }
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/meetings/${meetingId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then((response) => setMeeting(response.data))
+      .then((response) => {
+        setMeeting(response.data)
+        settingDateTime(response.data.start)
+      })
       .catch((err) =>
         console.log("error getting meetingDetails from api", err)
       );
+
+     
   }, []);
+
+  
+  
+
 
   return (
     <div>
@@ -31,7 +52,8 @@ export default function MeetingDetails() {
           <h2>{meeting.title}</h2>
           <p>Goal: {meeting.goal}</p>
           <p>Description: {meeting.description}</p>
-          <p>Start: {meeting.start}</p>
+          <p>Date: {date}</p>
+          <p>Start: {time}</p>
           <p>Invites: {meeting.invites}</p>
         </div>
       )}
