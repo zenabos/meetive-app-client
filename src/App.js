@@ -9,6 +9,7 @@ import Homepage from "./pages/Homepage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import EditMeeting from "./components/EditMeeting";
+import TopicDetails from "./components/TopicDetails";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/meetings/create" element={<CreateMeeting />} />
         <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
         <Route path="/create-topic" element={<CreateTopic />} />
+        <Route path="/topics/:topicId" element={<TopicDetails />} />
+        
       </Routes>
     </div>
   );

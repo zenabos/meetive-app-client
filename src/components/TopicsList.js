@@ -41,13 +41,15 @@ export default function TopicsList(props) {
               <Link to={`/topics/${topic._id}`}>
                 <div>
                   <p>
-                    {topic.title} | {topic.totalTime} minutes{" "}
+                    {topic.title} | {topic.totalTime} minutes
                   </p>
                 </div>
               </Link>
             </div>
           );
         })}
+
+      <p>Total time: </p>
 
       <button onClick={toggleForm}>
         {displayForm ? "Cancel" : "Add Topic"}
