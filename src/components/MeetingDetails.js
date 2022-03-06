@@ -50,6 +50,7 @@ export default function MeetingDetails() {
           <p>Description: {meeting.description}</p>
           <p>Date: {date}</p>
           <p>Start: {time}</p>
+          <p>Owner: {meeting.owner.name}</p>
           <p>Invites: {meeting.invites.map((invite, index) => {
             return (
               <li key={index}>

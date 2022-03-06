@@ -9,6 +9,7 @@ export default function NavBar() {
     <div>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/meetings">My meetings</NavLink>
+      <NavLink to="/meetings/invitations">My invitations</NavLink>
       <NavLink to="/meetings/create">New Meeting</NavLink>
       {user && <button onClick={logOutUser}>Logout</button>}
     </div>
