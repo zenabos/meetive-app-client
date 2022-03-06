@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import TopicsList from "./TopicsList";
+import DeleteMeeting from "./DeleteMeeting";
 
 export default function MeetingDetails() {
   const { meetingId } = useParams();
@@ -49,7 +50,13 @@ export default function MeetingDetails() {
           <p>Description: {meeting.description}</p>
           <p>Date: {date}</p>
           <p>Start: {time}</p>
-          <p>Invites: {meeting.invites}</p>
+          <p>Invites: {meeting.invites.map((invite, index) => {
+            return (
+              <li key={index}>
+                {invite}
+              </li>
+            )
+          }  )}</p>
         </div>
       )}
 
@@ -63,6 +70,10 @@ export default function MeetingDetails() {
       <Link to="/meetings">
         <button>Go back</button>
       </Link>
+
+      <DeleteMeeting meetingId={meetingId} />
+
     </div>
+
   );
 }
