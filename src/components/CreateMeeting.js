@@ -8,12 +8,30 @@ export default function CreateMeeting() {
   const [goal, setGoal] = useState("");
   const [description, setDescription] = useState("");
   const [start, setStart] = useState(undefined);
-  const [invites, setInvites] = useState([]);
+  const [inputs, setInputs] = useState([]);
 
-  const {getToken} = useContext(AuthContext);
+  const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
 
   const navigate = useNavigate();
+
+  const handleInputs = (event, index) => {
+    let data = [...inputs];
+    data[index] = event.target.value;
+    setInputs(data);
+  };
+
+  const addFields = (e) => {
+    e.preventDefault();
+    setInputs([...inputs, ""]);
+  };
+
+  const removeFields = (event, index) => {
+    let data = [...inputs];
+    data.splice(index, 1);
+    setInputs(data);
+    event.preventDefault();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,17 +42,16 @@ export default function CreateMeeting() {
       goal,
       description,
       start,
-      invites,
+      invites: inputs,
     };
-
-
+    console.log(inputs);
     axios
       .post(`${process.env.REACT_APP_API_URL}/meetings`, meetingDetails, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(response.data);
-        navigate("/meetings");
+        console.log(response.data._id);
+        navigate(`/meetings/${response.data._id}`);
       })
       .catch((err) => console.log("error creating new meeting", err));
   };
@@ -45,15 +62,15 @@ export default function CreateMeeting() {
 
       <form onSubmit={handleSubmit}>
         <label>
-          Title: 
+          Title:
           <input
             type="text"
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-        </label> <br/>
-
+        </label>{" "}
+        <br />
         <label>
           Goal:
           <input
@@ -62,8 +79,8 @@ export default function CreateMeeting() {
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
           />
-        </label><br/>
-
+        </label>
+        <br />
         <label>
           Description:
           <input
@@ -72,8 +89,8 @@ export default function CreateMeeting() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </label><br/>
-
+        </label>
+        <br />
         <label>
           Start:
           <input
@@ -82,18 +99,29 @@ export default function CreateMeeting() {
             value={start}
             onChange={(e) => setStart(e.target.value)}
           />
-        </label><br/>
-
-        <label>
-          Invites:
-          <input
-            type="text"
-            name="invites"
-            value={invites}
-            onChange={(e) => setInvites(e.target.value)}
-          />
-        </label><br/>
-
+        </label>
+        <div className="Invites">
+          {inputs.map((input, index) => {
+            return (
+              <div key={index}>
+                <label>
+                  Invites:
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="zena@test.com"
+                    onChange={(event) => handleInputs(event, index)}
+                    value={input.email}
+                  />
+                </label>
+                <button onClick={(event) => removeFields(event, index)}>
+                  Delete
+                </button>
+              </div>
+            );
+          })}
+          <button onClick={addFields}>Add Invite</button>
+        </div>
         <button type="submit">Save</button>
       </form>
     </div>
