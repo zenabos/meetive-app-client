@@ -44,7 +44,6 @@ export default function CreateMeeting() {
       start,
       invites: inputs,
     };
-    console.log(inputs);
     axios
       .post(`${process.env.REACT_APP_API_URL}/meetings`, meetingDetails, {
         headers: { Authorization: `Bearer ${storedToken}` },
