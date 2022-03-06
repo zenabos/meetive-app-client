@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import MeetingsList from "../components/MeetingsList";
 import { AuthContext } from "../context/auth.context";
 
 export default function Homepage() {
@@ -10,8 +11,12 @@ export default function Homepage() {
       {user && (
         <div>
           <p>Hi {user.name} !</p>
+
+        <MeetingsList maxNumber={3}/>
         </div>
+
       )}
+
 
       {!user && (
         <div>

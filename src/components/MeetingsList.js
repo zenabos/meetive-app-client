@@ -3,17 +3,18 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-export default function MeetingsList() {
+export default function MeetingsList(props) {
   const [meetings, setMeetings] = useState([]);
 
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
 
-  const sortMeetings = (meetings) => {
-    const sortedMeetings = meetings.sort(
-      (a, b) => new Date(a.start) - new Date(b.start)
-    );
-    setMeetings(sortedMeetings);
+  const updateMeetings = (meetings) => {
+    const newArr = meetings.filter(meeting => new Date(meeting.start) > Date.now())
+    const newMeetingsArr = newArr
+      .sort((a, b) => new Date(a.start) - new Date(b.start))
+      .slice(0, props.maxNumber);
+    setMeetings(newMeetingsArr);
   };
 
   useEffect(() => {
@@ -22,14 +23,14 @@ export default function MeetingsList() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        sortMeetings(response.data);
+        updateMeetings(response.data);
       })
       .catch((err) => console.log("error getting meetings from api", err));
   }, []);
 
   return (
     <div className="MeetingsList">
-      <h2>My Meetings</h2>
+      <h2>Upcoming Meetings</h2>
 
       {meetings &&
         meetings.map((meeting) => {
