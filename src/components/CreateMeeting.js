@@ -8,7 +8,7 @@ export default function CreateMeeting() {
   const [goal, setGoal] = useState("");
   const [description, setDescription] = useState("");
   const [start, setStart] = useState(undefined);
-  const [inputs, setInputs] = useState([]);
+  const [invites, setInvites] = useState([]);
 
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
@@ -16,20 +16,20 @@ export default function CreateMeeting() {
   const navigate = useNavigate();
 
   const handleInputs = (event, index) => {
-    let data = [...inputs];
+    let data = [...invites];
     data[index] = event.target.value;
-    setInputs(data);
+    setInvites(data);
   };
 
   const addFields = (e) => {
     e.preventDefault();
-    setInputs([...inputs, ""]);
+    setInvites([...invites, ""]);
   };
 
   const removeFields = (event, index) => {
-    let data = [...inputs];
+    let data = [...invites];
     data.splice(index, 1);
-    setInputs(data);
+    setInvites(data);
     event.preventDefault();
   };
 
@@ -42,7 +42,7 @@ export default function CreateMeeting() {
       goal,
       description,
       start,
-      invites: inputs,
+      invites: invites,
     };
     axios
       .post(`${process.env.REACT_APP_API_URL}/meetings`, meetingDetails, {
@@ -100,19 +100,17 @@ export default function CreateMeeting() {
           />
         </label>
         <div className="Invites">
-          {inputs.map((input, index) => {
+          Invites:
+          {invites.map((invite, index) => {
             return (
               <div key={index}>
-                <label>
-                  Invites:
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder="zena@test.com"
-                    onChange={(event) => handleInputs(event, index)}
-                    value={input.email}
-                  />
-                </label>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="zena@test.com"
+                  onChange={(event) => handleInputs(event, index)}
+                  value={invite.email}
+                />
                 <button onClick={(event) => removeFields(event, index)}>
                   Delete
                 </button>
