@@ -14,7 +14,7 @@ export default function Homepage() {
 
           <MeetingsList maxNumber={3} />
 
-          <Link to="/meetings">
+          <Link to="/meetings/my-meetings">
             <button>My meetings</button>
           </Link>
           <Link to="/meetings/invitations">
