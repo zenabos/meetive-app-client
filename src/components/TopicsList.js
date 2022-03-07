@@ -6,7 +6,7 @@ import CreateTopic from "./CreateTopic";
 import DeleteTopic from "./DeleteTopic";
 
 export default function TopicsList(props) {
-  const { meetingId } = props;
+  const { meetingId, updateMeeting } = props;
   const [topics, setTopics] = useState([]);
   const [displayTopic, setDisplayTopic] = useState(false);
   const [displayForm, setDisplayForm] = useState(false);
@@ -23,8 +23,10 @@ export default function TopicsList(props) {
       .get(`${process.env.REACT_APP_API_URL}/meetings/${meetingId}/topics`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then((response) => {setTopics(response.data)
-      console.log(response.data)})
+      .then((response) => {
+        setTopics(response.data)
+      updateMeeting()
+      })
       .catch((err) => console.log("error getting topics from api", err));
   };
 
@@ -47,7 +49,7 @@ export default function TopicsList(props) {
               <p>
                 {topic.title}
                 <button onClick={toggleTopic}>
-                  {displayTopic ? "-" : "+"}{" "}
+                  {displayTopic ? "-" : "+"}
                 </button>
                 <DeleteTopic topicId={topic._id} updateTopics={updateTopics}/>
               </p>
@@ -61,8 +63,6 @@ export default function TopicsList(props) {
             </div>
           );
         })}
-
-      <p>Duration: </p>
 
       <button onClick={toggleForm}>
         {displayForm ? "Cancel" : "Add Topic"}
