@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Helpers from "./Helpers";
 
-export default function Invitations(props) {
+export default function MeetingsList(props) {
   const [meetings, setMeetings] = useState([]);
 
   const { getToken } = useContext(AuthContext);
@@ -20,7 +20,7 @@ export default function Invitations(props) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/meetings/invitations`, {
+      .get(`${process.env.REACT_APP_API_URL}/meetings/my-meetings`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -31,7 +31,7 @@ export default function Invitations(props) {
 
   return (
     <div className="MeetingsList">
-      <h2>My invitations</h2>
+      <h2>My Meetings</h2>
 
       {meetings &&
         meetings.map((meeting) => {

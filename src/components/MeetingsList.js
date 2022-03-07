@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Helpers from "./Helpers";
 
 export default function MeetingsList(props) {
   const [meetings, setMeetings] = useState([]);
@@ -10,11 +11,14 @@ export default function MeetingsList(props) {
   const storedToken = getToken();
 
   const updateMeetings = (meetings) => {
-    const newArr = meetings.filter(meeting => new Date(meeting.start) > Date.now())
+    const newArr = meetings.filter(
+      (meeting) => new Date(meeting.start) > Date.now()
+    );
     const newMeetingsArr = newArr
       .sort((a, b) => new Date(a.start) - new Date(b.start))
       .slice(0, props.maxNumber);
     setMeetings(newMeetingsArr);
+    console.log(newMeetingsArr);
   };
 
   useEffect(() => {
@@ -39,8 +43,7 @@ export default function MeetingsList(props) {
               <Link to={`/meetings/${meeting._id}`}>
                 <div>
                   <p>{meeting.title}</p>
-                  <p>{meeting.start}</p>
-                  <p>{meeting.time}</p>
+                  <Helpers timestamp={meeting.start} />
                 </div>
               </Link>
             </div>
