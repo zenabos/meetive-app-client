@@ -12,22 +12,27 @@ export default function Homepage() {
         <div>
           <p>Hi {user.name} !</p>
 
-        <MeetingsList maxNumber={3}/>
+          <MeetingsList maxNumber={3} />
+
+          <Link to="/meetings">
+            <button>My meetings</button>
+          </Link>
+          <Link to="/meetings/invitations">
+            <button>My invites</button>
+          </Link>
         </div>
-
       )}
-
 
       {!user && (
         <div>
           <h1>Meetive </h1>
           <h2>meet effective</h2>
-            <Link to="/signup">
-              <button>Sign Up</button>
-            </Link>
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
+          <Link to="/signup">
+            <button>Sign Up</button>
+          </Link>
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
         </div>
       )}
     </div>

@@ -21,13 +21,12 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/meetings" element={<MeetingList />} />
-        <Route path="/meetings/:meetingId" element={<MeetingDetails />} />
-        <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
-        <Route path="/meetings/create" element={<CreateMeeting />} />
-        <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
-        <Route path="/create-topic" element={<CreateTopic />} />
         <Route path="/meetings/invitations" element={<Invitations />} />
-        
+        <Route path="/meetings/create" element={<CreateMeeting />} />
+        <Route path="/create-topic" element={<CreateTopic />} />
+        <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
+        <Route path="/meetings/:meetingId" element={<MeetingDetails />} />
+        <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
       </Routes>
     </div>
   );

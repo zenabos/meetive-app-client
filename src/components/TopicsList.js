@@ -62,7 +62,7 @@ export default function TopicsList(props) {
           );
         })}
 
-      <p>Total time: </p>
+      <p>Duration: </p>
 
       <button onClick={toggleForm}>
         {displayForm ? "Cancel" : "Add Topic"}
