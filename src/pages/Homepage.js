@@ -1,7 +1,10 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import MeetingsList from "../components/MeetingsList";
 import { AuthContext } from "../context/auth.context";
+
+import * as React from "react";
+import Button from "@mui/material/Button";
 
 export default function Homepage() {
   const { user } = useContext(AuthContext);
@@ -13,13 +16,12 @@ export default function Homepage() {
           <p>Hi {user.name} !</p>
 
           <MeetingsList maxNumber={3} />
-
-          <Link to="/meetings/my-meetings">
-            <button>My meetings</button>
-          </Link>
-          <Link to="/meetings/invitations">
-            <button>My invites</button>
-          </Link>
+          <Button variant="outlined" href="/meetings/my-meetings">
+            My Meetings
+          </Button>
+          <Button variant="outlined" href="/meetings/invitations">
+            My invitations
+          </Button>
         </div>
       )}
 
