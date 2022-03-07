@@ -10,6 +10,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import EditMeeting from "./components/EditMeeting";
 import Invitations from "./components/Invitations";
+import MyMeetings from "./components/MyMeetings";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/meetings" element={<MeetingList />} />
+        <Route path="/meetings/my-meetings" element={<MyMeetings />} />
         <Route path="/meetings/invitations" element={<Invitations />} />
         <Route path="/meetings/create" element={<CreateMeeting />} />
         <Route path="/create-topic" element={<CreateTopic />} />
