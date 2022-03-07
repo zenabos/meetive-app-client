@@ -9,7 +9,6 @@ export default function CreateMeeting() {
   const [description, setDescription] = useState("");
   const [start, setStart] = useState(undefined);
   const [invites, setInvites] = useState([]);
-
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
 
@@ -49,6 +48,7 @@ export default function CreateMeeting() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
+        console.log(response.data)
         console.log(response.data._id);
         navigate(`/meetings/${response.data._id}`);
       })
@@ -109,7 +109,7 @@ export default function CreateMeeting() {
                   name="email"
                   placeholder="zena@test.com"
                   onChange={(event) => handleInputs(event, index)}
-                  value={invite.email}
+                  value={invite}
                 />
                 <button onClick={(event) => removeFields(event, index)}>
                   Delete

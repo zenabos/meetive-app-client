@@ -7,6 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import TopicsList from "./TopicsList";
 import DeleteMeeting from "./DeleteMeeting";
 import Helpers from "./Helpers";
+import EditMeeting from "./EditMeeting";
 
 export default function MeetingDetails() {
   const { meetingId } = useParams();
@@ -14,8 +15,6 @@ export default function MeetingDetails() {
   const [endTime, setEndTime] = useState("");
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
-
-  console.log(meeting.topics);
 
   useEffect(() => {
     updateMeeting();
@@ -43,7 +42,6 @@ export default function MeetingDetails() {
       hour: "2-digit",
       minute: "2-digit",
     });
-    console.log(newTime);
     setEndTime(newTime);
   };
 
@@ -63,21 +61,25 @@ export default function MeetingDetails() {
               return <li key={index}>{invite}</li>;
             })}
           </p>
+
+          <div>
+            <TopicsList meetingId={meetingId} updateMeeting={updateMeeting} />
+          </div>
+
+          <Link to={`/meetings/edit/${meetingId}`}>
+            <button>Edit</button>
+          </Link>
+          <Link to="/meetings">
+            <button>Go back</button>
+          </Link>
+
+          <DeleteMeeting meetingId={meetingId} />
         </div>
       )}
 
-      <div>
-        <TopicsList meetingId={meetingId} updateMeeting={updateMeeting}/>
-      </div>
 
-      <Link to={`/meetings/edit/${meetingId}`}>
-        <button>Edit</button>
-      </Link>
-      <Link to="/meetings">
-        <button>Go back</button>
-      </Link>
+    <EditMeeting meeting={meeting} meetingId={meetingId} updateMeeting={updateMeeting} />
 
-      <DeleteMeeting meetingId={meetingId} />
     </div>
   );
 }

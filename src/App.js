@@ -26,8 +26,8 @@ function App() {
         <Route path="/meetings/invitations" element={<Invitations />} />
         <Route path="/meetings/create" element={<CreateMeeting />} />
         <Route path="/create-topic" element={<CreateTopic />} />
-        <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
         <Route path="/meetings/:meetingId" element={<MeetingDetails />} />
+        <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
         <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
       </Routes>
     </div>
