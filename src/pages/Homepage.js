@@ -13,19 +13,26 @@ export default function Homepage() {
   return (
     <Container>
       {user && (
-        <div>
+        <Container>
           <p>Hi {user.name} !</p>
 
           <Box>
             <MeetingsList maxNumber={3} />
           </Box>
-          <Button variant="outlined" href="/meetings/my-meetings">
-            My Meetings
-          </Button>
-          <Button variant="outlined" href="/meetings/invitations">
-            My invitations
-          </Button>
-        </div>
+
+          <Grid container spacing={3} justifyContent="center" sx={{mt: 3}}>
+            <Grid item xs={8}>
+              <Button fullWidth variant="contained" href="/meetings/my-meetings">
+                My Meetings
+              </Button>
+            </Grid>
+            <Grid item xs={8}>
+              <Button fullWidth variant="contained" href="/meetings/invitations">
+                My invitations
+              </Button>
+            </Grid>
+          </Grid>
+        </Container>
       )}
 
       {!user && (
