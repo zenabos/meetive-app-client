@@ -5,7 +5,11 @@ import { AuthContext } from "../context/auth.context";
 import TextField from "@mui/material/TextField";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DateTimePicker from '@mui/lab/DateTimePicker';
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
@@ -61,40 +65,38 @@ export default function CreateMeeting() {
   };
 
   return (
-    <div className="CreateMeeting">
+    <Box className="CreateMeeting">
       <h1>New meeting</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label>
-          Title:
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </label>{" "}
-        <br />
-        <label>
-          Goal:
-          <input
-            type="text"
-            name="goal"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <input
-            type="text"
-            name="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-        <br />
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-name"
+          label="Title"
+          variant="outlined"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <TextField
+          id="outlined-name"
+          label="Goal"
+          variant="outlined"
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
+        />
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Description"
+          multiline
+          maxRows={4}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
         <LocalizationProvider dateAdapter={DateAdapter}>
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
@@ -105,28 +107,36 @@ export default function CreateMeeting() {
             }}
           />
         </LocalizationProvider>
-        <div className="Invites">
-          Invites:
-          {invites.map((invite, index) => {
-            return (
-              <div key={index}>
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="zena@test.com"
-                  onChange={(event) => handleInputs(event, index)}
-                  value={invite}
-                />
-                <button onClick={(event) => removeFields(event, index)}>
-                  Delete
-                </button>
-              </div>
-            );
-          })}
-          <button onClick={addFields}>Add Invite</button>
-        </div>
-        <button type="submit">Save</button>
-      </form>
-    </div>
+      </Box>
+
+      <Box className="Invites">
+        Invites:
+        {invites.map((invite, index) => {
+          return (
+            <Box key={index}>
+              <TextField
+                id="outlined-name"
+                label="Email"
+                variant="outlined"
+                value={invite}
+                onChange={(event) => handleInputs(event, index)}
+              />
+              <IconButton
+                onClick={(event) => removeFields(event, index)}
+                aria-label="delete"
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          );
+        })}
+        <Button onClick={addFields} variant="outlined">
+          Add Invite
+        </Button>
+      </Box>
+      <Button onClick={handleSubmit} variant="outlined">
+        Save
+      </Button>
+    </Box>
   );
 }
