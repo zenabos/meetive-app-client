@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Helpers from "./Helpers";
+import { Grid, Paper } from "@mui/material";
 
 export default function MeetingsList(props) {
   const [meetings, setMeetings] = useState([]);
@@ -33,22 +34,26 @@ export default function MeetingsList(props) {
   }, []);
 
   return (
-    <div className="MeetingsList">
-      <h2>Upcoming Meetings</h2>
+    <Grid container>
+      <Grid item xs={12}>
+        <h2>Upcoming Meetings</h2>
+      </Grid>
 
       {meetings &&
         meetings.map((meeting) => {
           return (
-            <div className="meeting-summary" key={meeting._id}>
-              <Link to={`/meetings/${meeting._id}`}>
-                <div>
-                  <p>{meeting.title}</p>
-                  <Helpers timestamp={meeting.start} />
-                </div>
-              </Link>
-            </div>
+            <Grid item xs={12} key={meeting._id}>
+              <Grid container justifyContent="space-between">
+                <Grid item xs={4}>
+                  <Link to={`/meetings/${meeting._id}`}>{meeting.title}</Link>
+                </Grid>
+                <Grid item xs={8}>
+                  <Helpers timestamp={meeting.start} />{" "}
+                </Grid>
+              </Grid>
+            </Grid>
           );
         })}
-    </div>
+    </Grid>
   );
 }

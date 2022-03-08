@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Grid } from "@mui/material";
 
 export default function Helpers(props) {
   const { timestamp } = props;
@@ -22,9 +23,9 @@ export default function Helpers(props) {
   setDate(newDate);}, [] )
   
   return (
-    <div>
-      <p>Date: {date}</p>
-      <p>Start: {time}</p>
-    </div>
+    <Grid container>
+      <Grid item xs={4}>{date}</Grid>
+      <Grid item xs={4}>{time}</Grid>
+    </Grid>
   );
 }

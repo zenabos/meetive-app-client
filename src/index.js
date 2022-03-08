@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import DateAdapter from '@mui/lab/AdapterMoment';
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProviderWrapper } from "./context/auth.context";
@@ -11,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <AuthProviderWrapper>
       <Router>
-        <App />
+        <LocalizationProvider dateAdapter={DateAdapter}>
+          <App />
+        </LocalizationProvider>
       </Router>
     </AuthProviderWrapper>
   </React.StrictMode>,

@@ -2,14 +2,19 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import TextField from "@mui/material/TextField";
+import DateAdapter from "@mui/lab/AdapterMoment";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateTimePicker from '@mui/lab/DateTimePicker';
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
   const [goal, setGoal] = useState("");
   const [description, setDescription] = useState("");
-  const [start, setStart] = useState(undefined);
   const [invites, setInvites] = useState([]);
   const { getToken } = useContext(AuthContext);
+  const [start, setStart] = useState(null);
+
   const storedToken = getToken();
 
   const navigate = useNavigate();
@@ -48,7 +53,7 @@ export default function CreateMeeting() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         console.log(response.data._id);
         navigate(`/meetings/${response.data._id}`);
       })
@@ -90,15 +95,16 @@ export default function CreateMeeting() {
           />
         </label>
         <br />
-        <label>
-          Start:
-          <input
-            type="datetime-local"
-            name="start"
+        <LocalizationProvider dateAdapter={DateAdapter}>
+          <DateTimePicker
+            renderInput={(props) => <TextField {...props} />}
+            label="Start"
             value={start}
-            onChange={(e) => setStart(e.target.value)}
+            onChange={(newValue) => {
+              setStart(newValue);
+            }}
           />
-        </label>
+        </LocalizationProvider>
         <div className="Invites">
           Invites:
           {invites.map((invite, index) => {
