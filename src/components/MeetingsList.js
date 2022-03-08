@@ -43,12 +43,12 @@ export default function MeetingsList(props) {
       {meetings &&
         meetings.map((meeting) => {
           return (
-            <Grid container key={meeting._id} sx={{ p: 3 }}>
+            <Grid container key={meeting._id} sx={{ p: 2 }}>
               <Grid item xs={6} sx={{ textAlign: 'left' }}>
                 <Link to={`/meetings/${meeting._id}`}>{meeting.title}</Link>
               </Grid>
               <Grid item xs={3}>
-                {moment(meeting.start).format("ddd DD/MM")}
+                {moment(meeting.start).format("DD/MM")}
               </Grid>
               <Grid item xs={3}>
                 {moment(meeting.start).format("HH:mm")}

@@ -12,6 +12,7 @@ import EditMeeting from "./components/EditMeeting";
 import Invitations from "./components/Invitations";
 import MyMeetings from "./components/MyMeetings";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Container } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -24,8 +25,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <Navbar />
+      <Container className="App" sx={{mt: 8}}>
         
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -40,7 +40,8 @@ function App() {
           <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
           <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
         </Routes>
-      </div>
+        <Navbar />
+      </Container>
     </ThemeProvider>
   );
 }

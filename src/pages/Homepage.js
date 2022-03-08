@@ -21,12 +21,12 @@ export default function Homepage() {
           </Box>
 
           <Grid container spacing={3} justifyContent="center" sx={{mt: 3}}>
-            <Grid item xs={8}>
+            <Grid item xs={12}>
               <Button fullWidth variant="contained" href="/meetings/my-meetings">
                 My Meetings
               </Button>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12}>
               <Button fullWidth variant="contained" href="/meetings/invitations">
                 My invitations
               </Button>
