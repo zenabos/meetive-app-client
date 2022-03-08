@@ -26,7 +26,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Navbar />
-
+        
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/signup" element={<SignupPage />} />
