@@ -16,9 +16,7 @@ export default function Homepage() {
         <Container>
           <p>Hi {user.name} !</p>
 
-          <Box>
             <MeetingsList maxNumber={3} />
-          </Box>
 
           <Grid container spacing={3} justifyContent="center" sx={{mt: 3}}>
             <Grid item xs={12}>

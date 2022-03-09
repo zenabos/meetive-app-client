@@ -1,17 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import moment from "moment";
-import { Box } from "@mui/material";
-import { Divider } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActionArea,
+} from "@mui/material";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 export default function MeetingsList(props) {
   const [meetings, setMeetings] = useState([]);
-
-  // const date = moment(start).format("ddd DD/MM");
-  // const time = moment(start).format("HH:mm");
 
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
@@ -38,22 +41,49 @@ export default function MeetingsList(props) {
   }, []);
 
   return (
-    <Box sx={{ border: 1, borderColor: "primary.main", borderRadius: 2, pb: 3}}>
-      <h3>Upcoming Meetings</h3>
+    <Box>
+ <Typography color="primary" component="h1" variant="h5">
+          Upcoming meetings
+        </Typography>
       {meetings &&
         meetings.map((meeting) => {
           return (
-            <Grid container key={meeting._id} sx={{ p: 2 }}>
-              <Grid item xs={6} sx={{ textAlign: 'left' }}>
-                <Link to={`/meetings/${meeting._id}`}>{meeting.title}</Link>
-              </Grid>
-              <Grid item xs={3}>
-                {moment(meeting.start).format("DD/MM")}
-              </Grid>
-              <Grid item xs={3}>
-                {moment(meeting.start).format("HH:mm")}
-              </Grid>
-            </Grid>
+            <Card key={meeting._id} sx={{ p: 0, mb: 1 }}>
+              <CardActionArea href={`/meetings/${meeting._id}`}>
+                <CardHeader
+                  sx={{ pb: 0, textAlign: "left" }}
+                  subheader={meeting.title}
+                />
+                <CardContent sx={{ pt: 1 }}>
+                  <Grid container justifyContent="space-between">
+                    <Grid item xs={4}>
+                      <Grid container direction="row" alignItems="center">
+                        <CalendarTodayIcon
+                          fontSize="small"
+                          color="primary"
+                          sx={{ mr: 1 }}
+                        />
+                        <Typography>
+                          {moment(meeting.start).format("DD/MM")}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Grid container direction="row" alignItems="center">
+                        <AccessTimeIcon
+                          fontSize="small"
+                          color="primary"
+                          sx={{ mr: 1 }}
+                        />
+                        <Typography>
+                          {moment(meeting.start).format("HH:mm")}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           );
         })}
     </Box>

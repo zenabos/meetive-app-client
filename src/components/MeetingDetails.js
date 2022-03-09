@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import TopicsList from "./TopicsList";
 import DeleteMeeting from "./DeleteMeeting";
-import Helpers from "./Helpers";
+import moment from "moment";
 import EditMeeting from "./EditMeeting";
 
 export default function MeetingDetails() {
@@ -52,7 +52,8 @@ export default function MeetingDetails() {
           <h2>{meeting.title}</h2>
           <p>Goal: {meeting.goal}</p>
           <p>Description: {meeting.description}</p>
-          <Helpers timestamp={meeting.start} />
+          <p>Date: {moment(meeting.start).format("DD/MM")} </p>
+          <p>Start: {moment(meeting.start).format("HH:mm")}</p>
           <p>End: {endTime} </p>
           <p>Owner: {meeting.owner.name}</p>
           <p>
@@ -77,9 +78,11 @@ export default function MeetingDetails() {
         </div>
       )}
 
-
-    <EditMeeting meeting={meeting} meetingId={meetingId} updateMeeting={updateMeeting} />
-
+      <EditMeeting
+        meeting={meeting}
+        meetingId={meetingId}
+        updateMeeting={updateMeeting}
+      />
     </div>
   );
 }

@@ -10,15 +10,14 @@ export default function DeleteMeeting(props) {
   const storedToken = getToken();
   const navigate = useNavigate();
 
-
   const deleteMeeting = (e) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/meetings/${meetingId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        navigate('/meetings');
-    })
+        navigate("/meetings/my-meetings");
+      })
       .catch((err) =>
         console.log("error getting meetingDetails from api", err)
       );
