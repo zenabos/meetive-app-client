@@ -15,7 +15,6 @@ import { Typography } from "@mui/material";
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
   const [goal, setGoal] = useState("");
-  const [description, setDescription] = useState("");
   const [invites, setInvites] = useState([]);
   const { getToken } = useContext(AuthContext);
   const [start, setStart] = useState(null);
@@ -49,7 +48,6 @@ export default function CreateMeeting() {
     const meetingDetails = {
       title,
       goal,
-      description,
       start,
       invites: invites,
     };
@@ -73,7 +71,7 @@ export default function CreateMeeting() {
       <Box
         component="form"
         sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
+          "& > :not(style)": { m: 1, width: "30ch" },
         }}
         noValidate
         autoComplete="off"
@@ -92,14 +90,6 @@ export default function CreateMeeting() {
           value={goal}
           onChange={(e) => setGoal(e.target.value)}
         />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Description"
-          multiline
-          maxRows={4}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
         <LocalizationProvider dateAdapter={DateAdapter}>
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
@@ -117,6 +107,7 @@ export default function CreateMeeting() {
           return (
             <Box key={index}>
               <TextField
+              size="small"
                 id="outlined-name"
                 label="Email"
                 variant="outlined"
@@ -132,11 +123,11 @@ export default function CreateMeeting() {
             </Box>
           );
         })}
-        <Button onClick={addFields} variant="outlined">
+        <Button size="small" onClick={addFields} variant="outlined">
           Add Invite
         </Button>
       </Box>
-      <Button onClick={handleSubmit} variant="outlined">
+      <Button fullWidth onClick={handleSubmit} variant="contained">
         Save
       </Button>
     </Box>

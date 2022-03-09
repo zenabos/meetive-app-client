@@ -92,8 +92,9 @@ function LoginPage(props) {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
+            <Typography variant="body2" display="inline">Don't have an account?{" "}</Typography>
               <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+                Sign up here
               </Link>
             </Grid>
           </Grid>

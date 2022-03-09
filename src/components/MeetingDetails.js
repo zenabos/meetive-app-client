@@ -2,17 +2,39 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import TopicsList from "./TopicsList";
-import DeleteMeeting from "./DeleteMeeting";
 import moment from "moment";
-import EditMeeting from "./EditMeeting";
+import {
+  Box,
+  Container,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+} from "@mui/material";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import PersonIcon from "@mui/icons-material/Person";
+import GroupIcon from "@mui/icons-material/Group";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { Button } from "@mui/material";
+import MeetingMenu from "./MeetingMenu";
 
 export default function MeetingDetails() {
   const { meetingId } = useParams();
   const [meeting, setMeeting] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [openInvites, setOpenInvites] = useState(false);
+
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
 
@@ -45,44 +67,82 @@ export default function MeetingDetails() {
     setEndTime(newTime);
   };
 
+  const handleClick = () => {
+    setOpenInvites(!openInvites);
+  };
+
   return (
-    <div>
+    <Container>
+      <Box textAlign="left">
+        <Button href="/meetings" size="small" startIcon={<ArrowBackIosIcon />}>
+          Back
+        </Button>
+      </Box>
       {meeting && (
-        <div key={meeting._id}>
-          <h2>{meeting.title}</h2>
-          <p>Goal: {meeting.goal}</p>
-          <p>Description: {meeting.description}</p>
-          <p>Date: {moment(meeting.start).format("DD/MM")} </p>
-          <p>Start: {moment(meeting.start).format("HH:mm")}</p>
-          <p>End: {endTime} </p>
-          <p>Owner: {meeting.owner.name}</p>
-          <p>
-            Invites:{" "}
-            {meeting.invites.map((invite, index) => {
-              return <li key={index}>{invite}</li>;
-            })}
-          </p>
+        <Card key={meeting._id}>
+          <CardHeader
+            action={<MeetingMenu meetingId={meetingId} />}
+            title={meeting.title}
+            subheader={meeting.goal}
+            sx={{ textAlign: "left", pb: 0, pl: 4, pt: 4 }}
+          />
+          <CardContent>
+            <List
+              sx={{ width: "100%", maxWidth: 300, bgcolor: "background.paper" }}
+              component="nav"
+            >
+              <ListItem>
+                <ListItemIcon>
+                  <CalendarTodayIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={moment(meeting.start).format("dddd DD MMMM")}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <AccessTimeIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={`${moment(meeting.start).format(
+                    "HH:mm"
+                  )} - ${endTime}`}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <PersonIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText primary={meeting.owner.name} />
+              </ListItem>
+              <ListItemButton onClick={handleClick}>
+                <ListItemIcon>
+                  <GroupIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText primary="Invites" />
+                {openInvites ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={openInvites} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {meeting.invites.map((invite, index) => {
+                    return (
+                      <ListItem key={index} sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                          <PersonIcon color="primary" />
+                        </ListItemIcon>
+                        <ListItemText primary={invite} />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </Collapse>
+            </List>
 
-          <div>
+            <Divider />
             <TopicsList meetingId={meetingId} updateMeeting={updateMeeting} />
-          </div>
-
-          <Link to={`/meetings/edit/${meetingId}`}>
-            <button>Edit</button>
-          </Link>
-          <Link to="/meetings">
-            <button>Go back</button>
-          </Link>
-
-          <DeleteMeeting meetingId={meetingId} />
-        </div>
+          </CardContent>
+        </Card>
       )}
-
-      <EditMeeting
-        meeting={meeting}
-        meetingId={meetingId}
-        updateMeeting={updateMeeting}
-      />
-    </div>
+    </Container>
   );
 }

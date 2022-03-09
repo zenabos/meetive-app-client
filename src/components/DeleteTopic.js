@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
+import { IconButton } from "@mui/material";
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 export default function DeleteTopic(props) {
   const { topicId, updateTopics } = props;
@@ -14,11 +16,15 @@ export default function DeleteTopic(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-          console.log("succesfull deleted")
+        console.log("succesfull deleted");
         updateTopics();
       })
       .catch((err) => console.log("error deleting topic from api", err));
   };
 
-  return <button onClick={deleteTopic}>Delete</button>;
+  return (
+    <IconButton sx={{ml:3}} onClick={deleteTopic} aria-label="delete" color="secondary">
+      <CancelOutlinedIcon />
+    </IconButton>
+  );
 }

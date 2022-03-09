@@ -29,7 +29,7 @@ export default function NavBar() {
         >
           <BottomNavigationAction component={NavLink} to="/" label="Home" icon={<HomeIcon />} />
           <BottomNavigationAction component={NavLink} to="/meetings/my-meetings" label="Meetings" icon={<FavoriteIcon />} />
-          <BottomNavigationAction component={NavLink} to="/meetings/invitations" label="Invites" icon={<EmailIcon />} />
+          <BottomNavigationAction component={NavLink} to="/meetings/invitations" label="Invitations" icon={<EmailIcon />} />
           <BottomNavigationAction component={NavLink} to="/meetings/create" label="Add meeting" icon={<AddCircleRounded />} />
         </BottomNavigation>
       </Paper>

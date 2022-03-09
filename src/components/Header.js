@@ -11,22 +11,24 @@ export default function Header() {
   const { user, logOutUser } = useContext(AuthContext);
 
   return (
-    <AppBar position="fixed">
-      <Toolbar>
-        <Typography variant="h7" component="div" sx={{ flexGrow: 1 }}>
-          Meet effective
-        </Typography>
+    <Box>
+        
         {user && (
+          <AppBar position="fixed">
+          <Toolbar>
+          <Typography variant="h7" component="div" sx={{ flexGrow: 1 }}>
+          Hi {user.name}!
+        </Typography>
           <IconButton
             onClick={logOutUser}
             color="inherit"
-            aria-haspopup="true"
             label="Logout"
           >
             <AccountCircleIcon />
           </IconButton>
-        )}
       </Toolbar>
     </AppBar>
-  );
+  )}
+  </Box>
+  )
 }

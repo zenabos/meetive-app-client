@@ -2,6 +2,12 @@ import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { Typography, Container } from "@mui/material";
+import { InputAdornment } from "@mui/material";
+
 export default function CreateTopic(props) {
   const { meetingId, toggleForm, updateTopics } = props;
 
@@ -47,73 +53,105 @@ export default function CreateTopic(props) {
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <h2>Topic</h2>
-          <label>
-            Title:
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
-            />
-          </label>{" "}
-          <br />
-          <label>
-            Description:
-            <input
-              type="text"
-              name="description"
-              placeholder="Description"
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-            />
-          </label>
-          <p>Fill up how much time you'll need for:</p>
-          <label>
-            Introduction:
-            <input
-              type="number"
-              name="introductionTime"
-              placeholder={0}
-              onChange={(e) => setIntroductionTime(e.target.value)}
-              value={introductionTime}
-            />
-            minutes
-          </label>
-          <br />
-          <label>
-            Discussion:
-            <input
-              type="number"
-              name="discussionTime"
-              placeholder={0}
-              onChange={(e) => setDiscussionTime(e.target.value)}
-              value={discussionTime}
-            />
-            minutes
-          </label>
-          <br />
-          <label>
-            Conclusion:
-            <input
-              type="number"
-              name="conclusionTime"
-              placeholder={0}
-              onChange={(e) => setConclusionTime(e.target.value)}
-              value={conclusionTime}
-            />
-            minutes
-          </label>
-          <br />
-          Total: {totalTime} minutes <br />
-          <button type="submit">Save</button>
-        </div>
-      </form>
-      <br />
-    </div>
+    <Container className="CreateTopic">
+      <Typography component="h1" variant="h5">
+        Add Topic
+      </Typography>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-name"
+          label="Title"
+          variant="outlined"
+          size="small"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Description"
+          multiline
+          size="small"
+          maxRows={4}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <Typography>How much time do you need?</Typography>
+
+        <TextField
+          id="outlined-name"
+          label="Introduction"
+          variant="outlined"
+          type="number"
+          size="small"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">minutes</InputAdornment>
+            ),
+          }}
+          value={introductionTime}
+          onChange={(e) => setIntroductionTime(e.target.value)}
+        />
+
+        <TextField
+          id="outlined-name"
+          label="Discussion"
+          variant="outlined"
+          type="number"
+          size="small"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">minutes</InputAdornment>
+            ),
+          }}
+          value={discussionTime}
+          onChange={(e) => setDiscussionTime(e.target.value)}
+        />
+
+        <TextField
+          id="outlined-name"
+          label="Conclusion"
+          variant="outlined"
+          type="number"
+          size="small"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">minutes</InputAdornment>
+            ),
+          }}
+          value={conclusionTime}
+          onChange={(e) => setConclusionTime(e.target.value)}
+        />
+
+        <TextField
+          id="outlined-name"
+          disabled
+          label="Total"
+          variant="outlined"
+          type="number"
+          size="small"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">minutes</InputAdornment>
+            ),
+          }}
+          value={totalTime}
+        />
+      </Box>
+      <Box></Box>
+      <Button sx={{ mb: 3, mt: 2, width: "30ch"}} size="small" onClick={handleSubmit} variant="contained">
+        Save
+      </Button>
+    </Container>
   );
 }

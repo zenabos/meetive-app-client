@@ -3,12 +3,14 @@ import axios from "axios";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import CreateTopic from "./CreateTopic";
-import DeleteTopic from "./DeleteTopic";
+import { CardHeader, Box } from "@mui/material";
+import { Button } from "@mui/material";
+import TopicDetails from "./TopicDetails";
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
 export default function TopicsList(props) {
   const { meetingId, updateMeeting } = props;
   const [topics, setTopics] = useState([]);
-  const [displayTopic, setDisplayTopic] = useState(false);
   const [displayForm, setDisplayForm] = useState(false);
 
   const { getToken } = useContext(AuthContext);
@@ -24,14 +26,10 @@ export default function TopicsList(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        setTopics(response.data)
-      updateMeeting()
+        setTopics(response.data);
+        updateMeeting();
       })
       .catch((err) => console.log("error getting topics from api", err));
-  };
-
-  const toggleTopic = () => {
-    setDisplayTopic(!displayTopic);
   };
 
   const toggleForm = () => {
@@ -39,41 +37,22 @@ export default function TopicsList(props) {
   };
 
   return (
-    <div className="TopicsList">
-      <h4>Topics</h4>
-
+    <Box className="TopicsList">
+      <CardHeader subheader="Topics" sx={{ textAlign: "left", pb: 0 }} />
       {topics &&
         topics.map((topic) => {
           return (
-            <div className="topics-summary" key={topic._id}>
-              <p>
-                {topic.title}
-                <button onClick={toggleTopic}>
-                  {displayTopic ? "-" : "+"}
-                </button>
-                <DeleteTopic topicId={topic._id} updateTopics={updateTopics}/>
-              </p>
-              {displayTopic && (
-                <div key={topic._id}>
-                  <p>Description: {topic.description}</p>
-                  <p>Owner: {topic.owner.name}</p>
-                  <p>Duration: {topic.totalTime} minutes</p>
-                </div>
-              )}
-            </div>
-          );
+            <TopicDetails key={topic._id} topic={topic} updateTopics={updateTopics} />
+            );
         })}
-
-      <button onClick={toggleForm}>
-        {displayForm ? "Cancel" : "Add Topic"}
-      </button>
-      {displayForm && (
+      <Button onClick={toggleForm}>{displayForm ? "Cancel" : "Add Topic"}</Button>
+        {displayForm && (
         <CreateTopic
           meetingId={meetingId}
           toggleForm={toggleForm}
           updateTopics={updateTopics}
         />
       )}
-    </div>
+    </Box>
   );
 }

@@ -108,8 +108,9 @@ function SignupPage(props) {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
+              <Typography variant="body2" display="inline">Already have an account?{" "}</Typography>
               <Link href="/login" variant="body2">
-                Already have an account? Log in
+                Log in here
               </Link>
             </Grid>
           </Grid>

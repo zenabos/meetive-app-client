@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { Button } from "@mui/material";
 export default function DeleteMeeting(props) {
   const { meetingId } = props;
 
@@ -23,5 +23,9 @@ export default function DeleteMeeting(props) {
       );
   };
 
-  return <button onClick={deleteMeeting}>Delete</button>;
+  return (
+    <Button size="small" onClick={deleteMeeting} variant="outlined">
+      Delete
+    </Button>
+  );
 }

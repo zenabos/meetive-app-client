@@ -14,7 +14,6 @@ export default function Homepage() {
     <Container>
       {user && (
         <Container>
-          <p>Hi {user.name} !</p>
 
             <MeetingsList maxNumber={3} />
 

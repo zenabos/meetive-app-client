@@ -20,6 +20,9 @@ const theme = createTheme({
     primary: {
       main: "#309cad",
     },
+    secondary: {
+      main: "#e91e63",
+    },
   },
 });
 
@@ -27,7 +30,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container className="App" sx={{ mt: 10 }}>
+      <Container className="App" sx={{ mt: 12 }}>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/signup" element={<SignupPage />} />
