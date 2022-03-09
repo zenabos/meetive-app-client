@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
-import moment from 'moment';
+import { Typography } from "@mui/material";
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
@@ -67,7 +67,9 @@ export default function CreateMeeting() {
 
   return (
     <Box className="CreateMeeting">
-      <h1>New meeting</h1>
+      <Typography component="h1" variant="h5">
+        New meeting
+      </Typography>
       <Box
         component="form"
         sx={{
@@ -109,7 +111,6 @@ export default function CreateMeeting() {
           />
         </LocalizationProvider>
       </Box>
-
       <Box className="Invites">
         Invites:
         {invites.map((invite, index) => {

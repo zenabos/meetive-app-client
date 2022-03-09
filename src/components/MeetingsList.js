@@ -42,7 +42,7 @@ export default function MeetingsList(props) {
 
   return (
     <Box>
- <Typography color="primary" component="h1" variant="h5">
+ <Typography component="h1" variant="h5">
           Upcoming meetings
         </Typography>
       {meetings &&

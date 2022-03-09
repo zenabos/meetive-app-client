@@ -36,7 +36,7 @@ export default function Invitations(props) {
   return (
     <Container>
     <Container>
-    <Typography color="primary" component="h1" variant="h5">
+    <Typography component="h1" variant="h5">
           My Invitations
         </Typography>
     {meetings &&

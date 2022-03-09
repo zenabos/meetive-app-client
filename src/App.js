@@ -13,6 +13,7 @@ import Invitations from "./components/Invitations";
 import MyMeetings from "./components/MyMeetings";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container } from "@mui/material";
+import Header from "./components/Header";
 
 const theme = createTheme({
   palette: {
@@ -25,8 +26,8 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Container className="App" sx={{mt: 8}}>
-        
+      <Header />
+      <Container className="App" sx={{ mt: 10 }}>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/signup" element={<SignupPage />} />
