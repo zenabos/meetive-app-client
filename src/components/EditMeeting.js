@@ -101,10 +101,11 @@ export default function EditMeeting() {
             }}
           >
            <h1>Edit Meeting</h1>
-            <Box component="form" noValidate autoComplete="off">
+            <Box component="form" onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
+                    required
                     fullWidth
                     size="small"
                     sx={{ mt: 1 }}
@@ -117,6 +118,7 @@ export default function EditMeeting() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    required
                     size="small"
                     fullWidth
                     multiline
@@ -134,6 +136,7 @@ export default function EditMeeting() {
                     <DateTimePicker
                       renderInput={(props) => (
                         <TextField
+                          required
                           sx={{ mt: 1 }}
                           fullWidth
                           size="small"
@@ -179,6 +182,8 @@ export default function EditMeeting() {
                   >
                     <Grid item xs={8}>
                       <TextField
+                        required
+                        type="email"
                         fullWidth
                         size="small"
                         id="outlined-name"
@@ -202,9 +207,9 @@ export default function EditMeeting() {
                 );
               })}
               <Button
+                type="submit"
                 sx={{ mt: 3 }}
                 fullWidth
-                onClick={handleSubmit}
                 variant="contained"
               >
                 Save

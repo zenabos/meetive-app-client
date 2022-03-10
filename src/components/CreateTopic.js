@@ -1,11 +1,10 @@
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
-
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { Typography, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { InputAdornment } from "@mui/material";
 
 export default function CreateTopic(props) {
@@ -13,9 +12,9 @@ export default function CreateTopic(props) {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [introductionTime, setIntroductionTime] = useState(0);
-  const [discussionTime, setDiscussionTime] = useState(0);
-  const [conclusionTime, setConclusionTime] = useState(0);
+  const [introductionTime, setIntroductionTime] = useState(null);
+  const [discussionTime, setDiscussionTime] = useState(null);
+  const [conclusionTime, setConclusionTime] = useState(null);
   const [totalTime, setTotalTime] = useState(0);
 
   useEffect(() => {
@@ -54,17 +53,15 @@ export default function CreateTopic(props) {
 
   return (
     <Container className="CreateTopic">
-      <h2>Add topic</h2>
       <Box
         component="form"
+        onSubmit={handleSubmit}
         sx={{
           "& > :not(style)": { m: 1, width: "25ch" },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
-        noValidate
-        autoComplete="off"
       >
         <TextField
           label="Title"
@@ -139,7 +136,6 @@ export default function CreateTopic(props) {
           label="Total"
           variant="outlined"
           type="number"
-
           size="small"
           InputProps={{
             endAdornment: (
@@ -148,16 +144,15 @@ export default function CreateTopic(props) {
           }}
           value={totalTime}
         />
+        <Button
+          type="submit"
+          sx={{ mb: 3, mt: 2, width: "30ch" }}
+          size="small"
+          variant="contained"
+        >
+          Save
+        </Button>
       </Box>
-      <Box></Box>
-      <Button
-        sx={{ mb: 3, mt: 2, width: "30ch" }}
-        size="small"
-        onClick={handleSubmit}
-        variant="contained"
-      >
-        Save
-      </Button>
     </Container>
   );
 }

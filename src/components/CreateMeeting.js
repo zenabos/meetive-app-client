@@ -75,17 +75,17 @@ export default function CreateMeeting() {
         }}
       >
         <h1>New Meeting</h1>
-        <Box component="form">
+        <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                required
                 fullWidth
                 size="small"
                 sx={{ mt: 1 }}
                 label="Title"
                 variant="outlined"
                 value={title}
-                required
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Grid>
@@ -167,12 +167,7 @@ export default function CreateMeeting() {
               </Grid>
             );
           })}
-          <Button
-            sx={{ mt: 3 }}
-            fullWidth
-            onClick={handleSubmit}
-            variant="contained"
-          >
+          <Button sx={{ mt: 3 }} type="submit" fullWidth variant="contained">
             Save
           </Button>
         </Box>

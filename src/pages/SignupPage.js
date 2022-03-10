@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
-
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,6 +13,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { NavLink } from "react-router-dom";
+
 
 function SignupPage(props) {
   const [name, setName] = useState("");
@@ -68,6 +69,7 @@ function SignupPage(props) {
                 label="Name"
                 required
                 fullWidth
+                size="small"
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -79,7 +81,7 @@ function SignupPage(props) {
                 name="email"
                 required
                 fullWidth
-                autoComplete="email"
+                size="small"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
@@ -87,6 +89,7 @@ function SignupPage(props) {
               <TextField
                 required
                 fullWidth
+                size="small"
                 name="password"
                 label="Password"
                 type="password"
@@ -110,7 +113,7 @@ function SignupPage(props) {
               <Typography variant="body2" color="black" display="inline">
                 Already have an account?{" "}
               </Typography>
-              <Link href="/login" variant="body2">
+              <Link component={NavLink} to="/login" variant="body2">
                 Log in here
               </Link>
             </Grid>

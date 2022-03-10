@@ -16,17 +16,26 @@ export default function Homepage() {
     <Container>
       {user && (
         <Container>
+          <MeetingsList maxNumber={3} />
 
-            <MeetingsList maxNumber={3} />
-
-          <Grid container spacing={3} justifyContent="center" sx={{mt: 3}}>
+          <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
             <Grid item xs={12}>
-              <Button component={Link} to="/meetings/my-meetings" fullWidth variant="contained" href="/meetings/my-meetings">
+              <Button
+                component={Link}
+                to="/meetings/my-meetings"
+                fullWidth
+                variant="contained"
+              >
                 My Meetings
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button component={Link} to="/meetings/invitations" fullWidth variant="contained">
+              <Button
+                component={Link}
+                to="/meetings/invitations"
+                fullWidth
+                variant="contained"
+              >
                 My invitations
               </Button>
             </Grid>
@@ -35,21 +44,31 @@ export default function Homepage() {
       )}
 
       {!user && (
-        <Container sx={{mt:20}}>
-        <img id="logo-home" src="/meetive-logo.png" alt="logo"/>
-        <Divider sx={{mt: 1, mb: 1}}/>
-        <Typography component="h1" variant="h4">
-          meet effective
-        </Typography>
+        <Container sx={{ mt: 20 }}>
+          <img id="logo-home" src="/meetive-logo.png" alt="logo" />
+          <Divider sx={{ mt: 1, mb: 1 }} />
+          <Typography component="h1" variant="h4">
+            meet effective
+          </Typography>
 
-          <Grid container justifyContent="center" spacing={2} sx={{mt: 4}} >
+          <Grid container justifyContent="center" spacing={2} sx={{ mt: 4 }}>
             <Grid item xs={6}>
-              <Button fullWidth variant="outlined" href="/signup">
+              <Button
+                component={Link}
+                to="/signup"
+                fullWidth
+                variant="outlined"
+              >
                 Sign up
               </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button fullWidth variant="contained" href="/login">
+              <Button
+                component={Link}
+                to="/login"
+                fullWidth
+                variant="contained"
+              >
                 Log in
               </Button>
             </Grid>

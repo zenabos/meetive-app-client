@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { NavLink } from "react-router-dom";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -64,6 +65,7 @@ function LoginPage(props) {
             required
             type="email"
             fullWidth
+            size="small"
             id="email"
             label="Email"
             name="email"
@@ -73,6 +75,7 @@ function LoginPage(props) {
             margin="normal"
             required
             fullWidth
+            size="small"
             name="password"
             label="Password"
             type="password"
@@ -92,7 +95,7 @@ function LoginPage(props) {
           <Grid container justifyContent="flex-end">
             <Grid item>
             <Typography variant="body2" color="black" display="inline">Don't have an account?{" "}</Typography>
-              <Link href="/signup" variant="body2">
+              <Link component={NavLink} to="/signup" variant="body2">
                 Sign up here
               </Link>
             </Grid>
