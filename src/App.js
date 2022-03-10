@@ -14,11 +14,13 @@ import MyMeetings from "./components/MyMeetings";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container } from "@mui/material";
 import Header from "./components/Header";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
 
 const theme = createTheme({
   palette: {
     background: {
-      default: "#f0f8ff"
+      default: "#f0f8ff",
     },
     primary: {
       main: "#309cad",
@@ -33,19 +35,90 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container className="App" sx={{ mt: 12, mb:5}}>
+      <Container className="App" sx={{ mt: 12, mb: 5 }}>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/meetings" element={<MeetingList />} />
-          <Route path="/meetings/my-meetings" element={<MyMeetings />} />
-          <Route path="/meetings/invitations" element={<Invitations />} />
-          <Route path="/meetings/create" element={<CreateMeeting />} />
-          <Route path="/create-topic" element={<CreateTopic />} />
-          <Route path="/meetings/:meetingId" element={<MeetingDetails />} />
-          <Route path="/meetings/edit/:meetingId" element={<EditMeeting />} />
-          <Route path="/:meetingId/add-topic" element={<CreateTopic />} />
+          <Route
+            path="/signup"
+            element={
+              <IsAnon>
+                <SignupPage />
+              </IsAnon>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <IsAnon>
+                <LoginPage />
+              </IsAnon>
+            }
+          />
+
+          <Route
+            path="/meetings"
+            element={
+              <IsPrivate>
+                <MeetingList />{" "}
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/meetings/my-meetings"
+            element={
+              <IsPrivate>
+                <MyMeetings />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/meetings/invitations"
+            element={
+              <IsPrivate>
+                <Invitations />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/meetings/create"
+            element={
+              <IsPrivate>
+                <CreateMeeting />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/create-topic"
+            element={
+              <IsPrivate>
+                <CreateTopic />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/meetings/:meetingId"
+            element={
+              <IsPrivate>
+                <MeetingDetails />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/meetings/edit/:meetingId"
+            element={
+              <IsPrivate>
+                <EditMeeting />
+              </IsPrivate>
+            }
+          />
+          <Route
+            path="/:meetingId/add-topic"
+            element={
+              <IsPrivate>
+                <CreateTopic />
+              </IsPrivate>
+            }
+          />
         </Routes>
         <Navbar />
       </Container>

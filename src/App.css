@@ -12,7 +12,10 @@
 }
 
 #logo-header {
-  max-width: 30%;
+  max-width: 40%;
+  margin-top: 5px;
+  margin-left: 5%;
+  padding: 10px;
 }
 
 h1 {

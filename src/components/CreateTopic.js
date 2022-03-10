@@ -139,6 +139,7 @@ export default function CreateTopic(props) {
           label="Total"
           variant="outlined"
           type="number"
+
           size="small"
           InputProps={{
             endAdornment: (

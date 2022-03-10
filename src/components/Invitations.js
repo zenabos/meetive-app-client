@@ -55,7 +55,7 @@ export default function Invitations(props) {
                   />
                   <CardContent sx={{ pt: 1 }}>
                     <Grid container justifyContent="space-between">
-                      <Grid item xs={4}>
+                      <Grid item xs={6}>
                         <Grid container direction="row" alignItems="center">
                           <CalendarTodayIcon
                             fontSize="small"
@@ -63,7 +63,7 @@ export default function Invitations(props) {
                             sx={{ mr: 1 }}
                           />
                           <Typography>
-                            {moment(meeting.start).format("DD/MM")}
+                            {moment(meeting.start).format("Do MMMM")}
                           </Typography>
                         </Grid>
                       </Grid>

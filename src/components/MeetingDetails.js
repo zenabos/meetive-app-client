@@ -93,6 +93,7 @@ export default function MeetingDetails() {
           Back
         </Button>
       </Box>
+            
       {meeting && (
         <Card key={meeting._id}>
           <CardHeader
