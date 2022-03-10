@@ -30,7 +30,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container className="App" sx={{ mt: 12 }}>
+      <Container className="App" sx={{ mt: 12, mb:5}}>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/signup" element={<SignupPage />} />

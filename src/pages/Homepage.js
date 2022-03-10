@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import MeetingsList from "../components/MeetingsList";
 import { AuthContext } from "../context/auth.context";
-// import logo from "./meetive-logo.jpg";
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Container, Grid } from "@mui/material";
+import { Typography } from "@mui/material";
+import { Divider } from "@mui/material";
 
 export default function Homepage() {
   const { user } = useContext(AuthContext);
@@ -33,23 +34,26 @@ export default function Homepage() {
       )}
 
       {!user && (
-        <Box>
-          {/* <img src={logo} alt="logo"/> */}
-          <h1>meet effective</h1>
+        <Container sx={{mt:20}}>
+        <img id="logo-home" src="/meetive-logo.png" alt="logo"/>
+        <Divider sx={{mt: 1, mb: 1}}/>
+        <Typography component="h1" variant="h4">
+          meet effective
+        </Typography>
 
-          <Grid container spacing={2} justifyContent="center">
-            <Grid item xs={4}>
+          <Grid container justifyContent="center" spacing={2} sx={{mt: 4}} >
+            <Grid item xs={6}>
               <Button fullWidth variant="outlined" href="/signup">
                 Sign up
               </Button>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <Button fullWidth variant="contained" href="/login">
                 Log in
               </Button>
             </Grid>
           </Grid>
-        </Box>
+        </Container>
       )}
     </Container>
   );

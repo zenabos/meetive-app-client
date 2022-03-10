@@ -34,7 +34,7 @@ export default function TopicDetails(props) {
     <List >
       <ListItem sx={{m:0, p:0}}>
         <ListItemButton key={topic._id} onClick={handleClick}>
-          {topic.title}
+        <ListItemText primary={topic.title} />
         </ListItemButton>
         {open ? <ExpandLess /> : <ExpandMore />}
         <DeleteTopic topicId={topic._id} updateTopics={updateTopics} />
@@ -45,7 +45,7 @@ export default function TopicDetails(props) {
             <ListItemIcon>
               <PersonIcon color="primary" />
             </ListItemIcon>
-            <ListItemText primary={topic.owner.name} />
+            <ListItemText primary={`${topic.owner.name} (owner)`} />
           </ListItem>
           <ListItem>
             <ListItemIcon>

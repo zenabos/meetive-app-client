@@ -113,7 +113,7 @@ export default function MeetingDetails() {
                 <ListItemIcon>
                   <PersonIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText primary={meeting.owner.name} />
+                <ListItemText primary={`${meeting.owner.name} (organisator)`} />
               </ListItem>
               <ListItemButton onClick={handleClick}>
                 <ListItemIcon>

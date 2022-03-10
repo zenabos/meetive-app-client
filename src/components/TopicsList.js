@@ -6,7 +6,6 @@ import CreateTopic from "./CreateTopic";
 import { CardHeader, Box } from "@mui/material";
 import { Button } from "@mui/material";
 import TopicDetails from "./TopicDetails";
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
 export default function TopicsList(props) {
   const { meetingId, updateMeeting } = props;

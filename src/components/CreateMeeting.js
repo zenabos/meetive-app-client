@@ -8,9 +8,12 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
-import { Typography } from "@mui/material";
+import { Typography, Container } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { Grid } from "@mui/material";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
@@ -64,72 +67,122 @@ export default function CreateMeeting() {
   };
 
   return (
-    <Box className="CreateMeeting">
-      <Typography component="h1" variant="h5">
-        New meeting
-      </Typography>
+    <Container component="main" maxWidth="xs">
       <Box
-        component="form"
         sx={{
-          "& > :not(style)": { m: 1, width: "30ch" },
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
-        noValidate
-        autoComplete="off"
       >
-        <TextField
-          id="outlined-name"
-          label="Title"
-          variant="outlined"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <TextField
-          id="outlined-name"
-          label="Goal"
-          variant="outlined"
-          value={goal}
-          onChange={(e) => setGoal(e.target.value)}
-        />
-        <LocalizationProvider dateAdapter={DateAdapter}>
-          <DateTimePicker
-            renderInput={(props) => <TextField {...props} />}
-            label="Start"
-            value={start}
-            onChange={(newValue) => {
-              setStart(newValue);
-            }}
-          />
-        </LocalizationProvider>
-      </Box>
-      <Box className="Invites">
-        Invites:
-        {invites.map((invite, index) => {
-          return (
-            <Box key={index}>
+        <Typography component="h1" variant="h5">
+          New meeting
+        </Typography>
+        <Box component="form" noValidate autoComplete="off">
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
               <TextField
-              size="small"
+                fullWidth
+                size="small"
+                sx={{ mt: 1 }}
                 id="outlined-name"
-                label="Email"
+                label="Title"
                 variant="outlined"
-                value={invite}
-                onChange={(event) => handleInputs(event, index)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                size="small"
+                fullWidth
+                sx={{ mt: 1 }}
+                id="outlined-name"
+                label="Goal"
+                variant="outlined"
+                value={goal}
+                onChange={(e) => setGoal(e.target.value)}
+              />{" "}
+            </Grid>
+            <Grid item xs={12}>
+              <LocalizationProvider dateAdapter={DateAdapter}>
+                <DateTimePicker
+                  renderInput={(props) => (
+                    <TextField
+                      sx={{ mt: 1 }}
+                      fullWidth
+                      size="small"
+                      {...props}
+                    />
+                  )}
+                  label="Start"
+                  value={start}
+                  onChange={(newValue) => {
+                    setStart(newValue);
+                  }}
+                />
+              </LocalizationProvider>
+            </Grid>
+          </Grid>
+          <Grid container textAlign="left" sx={{ mt: 2 }} alignItems="center">
+            <Grid item xs={4}>
+              <Typography component="h2" variant="h5">
+                Add Invites
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
               <IconButton
-                onClick={(event) => removeFields(event, index)}
+                onClick={addFields}
                 aria-label="delete"
+                color="primary"
               >
-                <DeleteIcon />
+                <AddCircleIcon />
               </IconButton>
-            </Box>
-          );
-        })}
-        <Button size="small" onClick={addFields} variant="outlined">
-          Add Invite
-        </Button>
+            </Grid>
+          </Grid>
+          {invites.map((invite, index) => {
+            return (
+              <Grid
+                container
+                item
+                key={index}
+                sx={{ mt: 1 }}
+                alignItems="center"
+              >
+                <Grid item xs={8}>
+                  <TextField
+                    fullWidth
+                    size="small"
+                    id="outlined-name"
+                    label="Email"
+                    variant="outlined"
+                    value={invite}
+                    onChange={(event) => handleInputs(event, index)}
+                  />
+                </Grid>
+                <Grid item xs={1} display="inline">
+                  <IconButton
+                    onClick={(event) => removeFields(event, index)}
+                    aria-label="delete"
+                    color="secondary"
+                  >
+                    <CancelOutlinedIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            );
+          })}
+          <Button
+            sx={{ mt: 3 }}
+            fullWidth
+            onClick={handleSubmit}
+            variant="contained"
+          >
+            Save
+          </Button>
+        </Box>
       </Box>
-      <Button fullWidth onClick={handleSubmit} variant="contained">
-        Save
-      </Button>
-    </Box>
+    </Container>
   );
 }
