@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Link } from "react-router-dom";
 
 export default function MeetingsList(props) {
   const [meetings, setMeetings] = useState([]);
@@ -47,7 +48,7 @@ export default function MeetingsList(props) {
         meetings.map((meeting) => {
           return (
             <Card key={meeting._id} sx={{ p: 0, mb: 1 }}>
-              <CardActionArea href={`/meetings/${meeting._id}`}>
+              <CardActionArea component={Link} to={`/meetings/${meeting._id}`}>
                 <CardHeader
                   sx={{ pb: 0, textAlign: "left" }}
                   subheader={meeting.title}

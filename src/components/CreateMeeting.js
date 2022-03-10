@@ -13,6 +13,7 @@ import { Container } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { Grid } from "@mui/material";
+import { Paper } from "@mui/material";
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");

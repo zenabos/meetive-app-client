@@ -53,7 +53,7 @@ export default function TopicDetails(props) {
             </ListItemIcon>
             <ListItemText primary={`${topic.totalTime} minutes`} />
           </ListItem>
-          <ListItem>{topic.description}</ListItem>
+          <ListItem>Description: {topic.description}</ListItem>
         </List>
       </Collapse>
     </List>

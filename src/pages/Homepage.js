@@ -7,6 +7,7 @@ import { Box } from "@mui/system";
 import { Container, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Divider } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function Homepage() {
   const { user } = useContext(AuthContext);
@@ -20,12 +21,12 @@ export default function Homepage() {
 
           <Grid container spacing={3} justifyContent="center" sx={{mt: 3}}>
             <Grid item xs={12}>
-              <Button fullWidth variant="contained" href="/meetings/my-meetings">
+              <Button component={Link} to="/meetings/my-meetings" fullWidth variant="contained" href="/meetings/my-meetings">
                 My Meetings
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button fullWidth variant="contained" href="/meetings/invitations">
+              <Button component={Link} to="/meetings/invitations" fullWidth variant="contained">
                 My invitations
               </Button>
             </Grid>
