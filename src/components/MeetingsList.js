@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
-import { Grid, Typography } from "@mui/material";
 import moment from "moment";
 import {
   Box,
@@ -9,6 +8,7 @@ import {
   CardContent,
   CardHeader,
   CardActionArea,
+  Grid, Typography
 } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -42,9 +42,7 @@ export default function MeetingsList(props) {
 
   return (
     <Box>
- <Typography component="h1" variant="h5">
-          Upcoming meetings
-        </Typography>
+        <h1>Upcoming Meetings</h1>
       {meetings &&
         meetings.map((meeting) => {
           return (
@@ -56,7 +54,7 @@ export default function MeetingsList(props) {
                 />
                 <CardContent sx={{ pt: 1 }}>
                   <Grid container justifyContent="space-between">
-                    <Grid item xs={4}>
+                    <Grid item xs={6}>
                       <Grid container direction="row" alignItems="center">
                         <CalendarTodayIcon
                           fontSize="small"
@@ -64,7 +62,7 @@ export default function MeetingsList(props) {
                           sx={{ mr: 1 }}
                         />
                         <Typography>
-                          {moment(meeting.start).format("DD/MM")}
+                          {moment(meeting.start).format("Do MMMM")}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -76,8 +74,11 @@ export default function MeetingsList(props) {
                           sx={{ mr: 1 }}
                         />
                         <Typography>
-                          {moment(meeting.start).format("HH:mm")}
-                        </Typography>
+                        {`${moment(meeting.start).format(
+                    "HH:mm"
+                  )} - ${moment(meeting.end).format(
+                    "HH:mm"
+                  )}`}                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>

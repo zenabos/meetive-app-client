@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+
 .App {
   text-align: center;
+  color: #f0f8ff
 }
 
 #logo-home {
@@ -8,5 +12,23 @@
 }
 
 #logo-header {
-  max-width: 20%
+  max-width: 30%;
+}
+
+h1 {
+ font-family: 'DM Serif Display', serif;
+  font-size: 25px;
+  color: black;
+}
+
+h2 {
+  font-family: 'DM Serif Display', serif;
+   font-size: 20px;
+   margin: 0;
+   color: black
+ }
+
+
+.error-message {
+  color: red;
 }

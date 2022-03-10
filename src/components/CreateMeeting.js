@@ -13,15 +13,14 @@ import { Typography, Container } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { Grid } from "@mui/material";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 
 export default function CreateMeeting() {
   const [title, setTitle] = useState("");
   const [goal, setGoal] = useState("");
   const [invites, setInvites] = useState([]);
-  const { getToken } = useContext(AuthContext);
   const [start, setStart] = useState(null);
 
+  const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
 
   const navigate = useNavigate();
@@ -51,7 +50,7 @@ export default function CreateMeeting() {
     const meetingDetails = {
       title,
       goal,
-      start,
+      start: start,
       invites: invites,
     };
     axios
@@ -59,8 +58,6 @@ export default function CreateMeeting() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(response.data);
-        console.log(response.data._id);
         navigate(`/meetings/${response.data._id}`);
       })
       .catch((err) => console.log("error creating new meeting", err));
@@ -76,20 +73,18 @@ export default function CreateMeeting() {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
-          New meeting
-        </Typography>
-        <Box component="form" noValidate autoComplete="off">
+        <h1>New Meeting</h1>
+        <Box component="form">
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 fullWidth
                 size="small"
                 sx={{ mt: 1 }}
-                id="outlined-name"
                 label="Title"
                 variant="outlined"
                 value={title}
+                required
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Grid>
@@ -97,8 +92,10 @@ export default function CreateMeeting() {
               <TextField
                 size="small"
                 fullWidth
+                multiline
+                maxRows={3}
                 sx={{ mt: 1 }}
-                id="outlined-name"
+                required
                 label="Goal"
                 variant="outlined"
                 value={goal}
@@ -118,6 +115,7 @@ export default function CreateMeeting() {
                   )}
                   label="Start"
                   value={start}
+                  required
                   onChange={(newValue) => {
                     setStart(newValue);
                   }}
@@ -126,17 +124,11 @@ export default function CreateMeeting() {
             </Grid>
           </Grid>
           <Grid container textAlign="left" sx={{ mt: 2 }} alignItems="center">
-            <Grid item xs={4}>
-              <Typography component="h2" variant="h5">
-                Add Invites
-              </Typography>
+            <Grid item xs={5}>
+              <h2>Add invites</h2>
             </Grid>
             <Grid item xs={1}>
-              <IconButton
-                onClick={addFields}
-                aria-label="delete"
-                color="primary"
-              >
+              <IconButton onClick={addFields} color="primary">
                 <AddCircleIcon />
               </IconButton>
             </Grid>
@@ -150,25 +142,26 @@ export default function CreateMeeting() {
                 sx={{ mt: 1 }}
                 alignItems="center"
               >
-                <Grid item xs={8}>
+                <Grid item xs={12}>
                   <TextField
                     fullWidth
                     size="small"
-                    id="outlined-name"
+                    type="email"
                     label="Email"
                     variant="outlined"
                     value={invite}
                     onChange={(event) => handleInputs(event, index)}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          onClick={(event) => removeFields(event, index)}
+                          color="secondary"
+                        >
+                          <CancelOutlinedIcon />
+                        </IconButton>
+                      ),
+                    }}
                   />
-                </Grid>
-                <Grid item xs={1} display="inline">
-                  <IconButton
-                    onClick={(event) => removeFields(event, index)}
-                    aria-label="delete"
-                    color="secondary"
-                  >
-                    <CancelOutlinedIcon />
-                  </IconButton>
                 </Grid>
               </Grid>
             );

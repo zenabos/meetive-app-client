@@ -54,9 +54,7 @@ export default function CreateTopic(props) {
 
   return (
     <Container className="CreateTopic">
-      <Typography component="h1" variant="h5">
-        Add Topic
-      </Typography>
+      <h2>Add topic</h2>
       <Box
         component="form"
         sx={{
@@ -69,30 +67,30 @@ export default function CreateTopic(props) {
         autoComplete="off"
       >
         <TextField
-          id="outlined-name"
           label="Title"
           variant="outlined"
           size="small"
+          required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextField
-          id="outlined-multiline-flexible"
           label="Description"
           multiline
           size="small"
           maxRows={4}
+          required
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <Typography>How much time do you need?</Typography>
+        <p>How much time do you need?</p>
 
         <TextField
-          id="outlined-name"
           label="Introduction"
           variant="outlined"
           type="number"
+          required
           size="small"
           InputProps={{
             endAdornment: (
@@ -108,6 +106,7 @@ export default function CreateTopic(props) {
           label="Discussion"
           variant="outlined"
           type="number"
+          required
           size="small"
           InputProps={{
             endAdornment: (
@@ -123,6 +122,7 @@ export default function CreateTopic(props) {
           label="Conclusion"
           variant="outlined"
           type="number"
+          required
           size="small"
           InputProps={{
             endAdornment: (
@@ -149,7 +149,12 @@ export default function CreateTopic(props) {
         />
       </Box>
       <Box></Box>
-      <Button sx={{ mb: 3, mt: 2, width: "30ch"}} size="small" onClick={handleSubmit} variant="contained">
+      <Button
+        sx={{ mb: 3, mt: 2, width: "30ch" }}
+        size="small"
+        onClick={handleSubmit}
+        variant="contained"
+      >
         Save
       </Button>
     </Container>

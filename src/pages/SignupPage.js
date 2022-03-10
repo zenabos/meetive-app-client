@@ -59,27 +59,26 @@ function SignupPage(props) {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="given-name"
                 name="name"
-                required
-                fullWidth
                 id="name"
                 label="Name"
-                autoFocus
+                required
+                fullWidth
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
-                fullWidth
+                type="email"
                 id="email"
                 label="Email"
                 name="email"
+                required
+                fullWidth
                 autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -108,7 +107,9 @@ function SignupPage(props) {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Typography variant="body2" display="inline">Already have an account?{" "}</Typography>
+              <Typography variant="body2" color="black" display="inline">
+                Already have an account?{" "}
+              </Typography>
               <Link href="/login" variant="body2">
                 Log in here
               </Link>

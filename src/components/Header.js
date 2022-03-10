@@ -6,21 +6,33 @@ import { AppBar, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { IconButton } from "@mui/material";
 import { Toolbar } from "@mui/material";
-import { textAlign } from "@mui/system";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Header() {
   const { user, logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    logOutUser();
+    navigate("/");
+  };
 
   return (
     <Box>
       {user && (
         <AppBar position="fixed">
           <Toolbar>
-            <img id="logo-header" src="/meetive-logo.png" alt="logo" />
-            <Typography variant="h7" component="div" sx={{ flexGrow: 1, textAlign: "right"}}>
+            <Link to="/">
+              <img id="logo-header" src="/meetive-logo-white.png" alt="logo" />
+            </Link>
+            <Typography
+              variant="h7"
+              component="div"
+              sx={{ flexGrow: 1, textAlign: "right" }}
+            >
               Hi {user.name}!
             </Typography>
-            <IconButton onClick={logOutUser} color="inherit" label="Logout">
+            <IconButton onClick={logOut} color="inherit" label="Logout">
               <AccountCircleIcon />
             </IconButton>
           </Toolbar>

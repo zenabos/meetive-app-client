@@ -28,15 +28,18 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Button } from "@mui/material";
 import MeetingMenu from "./MeetingMenu";
+import { useNavigate } from "react-router-dom";
 
 export default function MeetingDetails() {
   const { meetingId } = useParams();
   const [meeting, setMeeting] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [endTime, setEndTime] = useState(null);
   const [openInvites, setOpenInvites] = useState(false);
 
   const { getToken } = useContext(AuthContext);
   const storedToken = getToken();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     updateMeeting();
@@ -56,15 +59,23 @@ export default function MeetingDetails() {
       );
   };
 
+  useEffect(() => {
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/meetings/${meetingId}/endTime`, {endTime: endTime}, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => console.log("error updating endTime", err));
+  }, [endTime]);
+
   const calculateEndTime = (meeting) => {
     const meetingTimes = meeting.topics.map((topic) => topic.totalTime);
     const total = meetingTimes.reduce((prev, curr) => prev + curr, 0);
     const startTime = new Date(meeting.start).getTime();
-    const newTime = new Date(startTime + total * 60000).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    setEndTime(newTime);
+    const newTime = new Date(startTime + total * 60000)
+    setEndTime(newTime.toISOString());
   };
 
   const handleClick = () => {
@@ -74,14 +85,20 @@ export default function MeetingDetails() {
   return (
     <Container>
       <Box textAlign="left">
-        <Button href="/meetings" size="small" startIcon={<ArrowBackIosIcon />}>
+        <Button
+          onClick={() => navigate(-1)}
+          size="small"
+          startIcon={<ArrowBackIosIcon />}
+        >
           Back
         </Button>
       </Box>
       {meeting && (
         <Card key={meeting._id}>
           <CardHeader
-            action={<MeetingMenu meetingId={meetingId} />}
+            action={
+              <MeetingMenu meetingId={meetingId} owner={meeting.owner.email} />
+            }
             title={meeting.title}
             subheader={meeting.goal}
             sx={{ textAlign: "left", pb: 0, pl: 4, pt: 4 }}
@@ -106,7 +123,9 @@ export default function MeetingDetails() {
                 <ListItemText
                   primary={`${moment(meeting.start).format(
                     "HH:mm"
-                  )} - ${endTime}`}
+                  )} - ${moment(endTime).format(
+                    "HH:mm"
+                  )}`}
                 />
               </ListItem>
               <ListItem>

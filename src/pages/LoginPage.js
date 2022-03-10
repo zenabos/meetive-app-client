@@ -58,16 +58,15 @@ function LoginPage(props) {
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
+            type="email"
             fullWidth
             id="email"
             label="Email"
             name="email"
-            autoComplete="email"
-            autoFocus
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
@@ -92,7 +91,7 @@ function LoginPage(props) {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-            <Typography variant="body2" display="inline">Don't have an account?{" "}</Typography>
+            <Typography variant="body2" color="black" display="inline">Don't have an account?{" "}</Typography>
               <Link href="/signup" variant="body2">
                 Sign up here
               </Link>

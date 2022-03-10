@@ -43,9 +43,7 @@ export default function MeetingsList(props) {
   return (
     <Container>
       <Container>
-        <Typography component="h1" variant="h5">
-          My Meetings
-        </Typography>
+       <h1>My Meetings</h1>
         {meetings &&
           meetings.map((meeting) => {
             return (
@@ -77,7 +75,9 @@ export default function MeetingsList(props) {
                             sx={{ mr: 1 }}
                           />
                           <Typography>
-                            {moment(meeting.start).format("HH:mm")}
+                            {`${moment(meeting.start).format(
+                              "HH:mm"
+                            )} - ${moment(meeting.end).format("HH:mm")}`}{" "}
                           </Typography>
                         </Grid>
                       </Grid>
