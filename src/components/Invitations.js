@@ -22,7 +22,7 @@ export default function Invitations(props) {
 
   const updateMeetings = (meetings) => {
     const newArr = meetings.filter(
-      (meeting) => new Date(meeting.start) > Date.now()
+      (meeting) => new Date(meeting.end) > Date.now()
     );
     const newMeetingsArr = newArr
       .sort((a, b) => new Date(a.start) - new Date(b.start))
