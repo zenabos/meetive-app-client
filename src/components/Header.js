@@ -19,6 +19,7 @@ export default function Header() {
 
   const logOut = () => {
     logOutUser();
+    setAnchorEl(null);
     navigate("/");
   };
 
@@ -30,7 +31,12 @@ export default function Header() {
     <Box>
       {user && (
         <AppBar position="fixed">
-          <Grid container display="flex" flexDirection="row" alignItems= "center">
+          <Grid
+            container
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+          >
             <Grid item xs={7}>
               <Link to="/">
                 <img
