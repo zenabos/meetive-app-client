@@ -31,7 +31,7 @@ export default function Header() {
       {user && (
         <AppBar position="fixed">
           <Grid container display="flex" flexDirection="row" alignItems= "center">
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <Link to="/">
                 <img
                   id="logo-header"
@@ -40,7 +40,7 @@ export default function Header() {
                 />
               </Link>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <Typography
                 variant="h7"
                 component="div"

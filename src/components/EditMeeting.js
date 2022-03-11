@@ -83,9 +83,9 @@ export default function EditMeeting() {
       )
       .then((response) => {
         console.log(response.data._id);
-        navigate(`/meetings/${response.data._id}`);
+       return navigate(`/meetings/${response.data._id}`);
       })
-      .catch((err) => console.log("error creating new meeting", err));
+      .catch((err) => console.log("error editing meeting", err));
   };
 
   return (
